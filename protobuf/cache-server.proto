@@ -1,0 +1,59 @@
+syntax = "proto3";
+option go_package = "lib/";
+
+service CacheServer {
+    rpc SetValue(ValueCreationRequest) returns (ValueCreationResponse);
+    rpc GetValue(ValueContentsRequest) returns (ValueContentsResponse);
+    rpc DelValue(ValueDeletionRequest) returns (ValueDeletionResponse);
+}
+
+message ValueCreationRequest {
+    string service = 1;
+    string signature = 2;
+    string field = 3;
+    string value = 4;
+}
+
+message ValueContentsRequest {
+    string service = 1;
+    string field = 2;
+}
+
+message ValueDeletionRequest {
+    string service = 1;
+    string field = 2;
+}
+
+message ValueCreationResponse {
+    enum StatusCode {
+        OK = 0;
+        NOTICE = 1;
+        WARNING = 2;
+        ERROR = 3;
+        FATAL = 4;
+    }
+
+    StatusCode statusCode = 1;
+}
+message ValueContentsResponse {
+    enum StatusCode {
+        OK = 0;
+        NOTICE = 1;
+        WARNING = 2;
+        ERROR = 3;
+        FATAL = 4;
+    }
+
+    StatusCode statusCode = 1;
+}
+message ValueDeletionResponse {
+    enum StatusCode {
+        OK = 0;
+        NOTICE = 1;
+        WARNING = 2;
+        ERROR = 3;
+        FATAL = 4;
+    }
+
+    StatusCode statusCode = 1;
+}
